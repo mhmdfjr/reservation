@@ -46,11 +46,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
       setSelectedYear(getYear(parsedDate));
     } else {
       setSelectedDate(today);
+      // Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
       setCurrentMonth(today);
       setCurrentYear(getYear(today));
       onDateChange(format(today, "yyyy-MM-dd"));
     }
-  }, [value, onDateChange]);
+  }, [value, today, onDateChange]);
 
   const toggleDatepicker = () => {
     setShowDatepicker(!showDatepicker);

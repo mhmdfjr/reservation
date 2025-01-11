@@ -5,7 +5,7 @@ import ThemeSwitcher from "@/components/theme-switcher";
 import TopBar from "@/components/topbar";
 import { useState } from "react";
 
-export default function DashboardLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -17,11 +17,10 @@ export default function DashboardLayout({
   };
 
   return (
-    <main className="w-full min-h-screen h-full bg-brand-10/[.16] bg-white dark:bg-black">
-      <div className="flex flex-col relative">
-        <Sidebar display={display} />
-      </div>
-      <div className="lg:ml-60 flex flex-col relative">
+    <main className="w-full min-h-screen h-full bg-brand-10/[.16] relative bg-white dark:bg-black">
+      <Sidebar display={display} />
+
+      <div className="h-full lg:ml-60 flex flex-col">
         <ThemeSwitcher />
         <TopBar onMenuClick={handleMenuClick} />
         {children}

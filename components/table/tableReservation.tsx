@@ -2,7 +2,8 @@
 "use client";
 import Table from "@/components/table";
 import clsx from "clsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { db, ReservationType } from "@/app/db/db";
 import { useRouter } from "next/navigation";
 import Button from "../button";
 import Cookies from "js-cookie";
@@ -29,6 +30,43 @@ export default function TableReservation() {
 
   const token = Cookies.get("token");
   const router = useRouter();
+
+  const [reservations, setReservations] = useState<ReservationType[]>([]);
+  const [newReservation, setNewReservation] = useState<
+    Partial<ReservationType>
+  >({
+    customerName: "",
+    roomType: "",
+    roomNumber: undefined,
+    startDate: "",
+    endDate: "",
+    serviceType: "",
+    status: "Pending",
+  });
+
+  const fetchReservations = async () => {
+    const data = await db.reservations.toArray();
+    setReservations(data);
+  };
+
+  // Update a reservation
+  const updateReservation = async (
+    id: number,
+    updates: Partial<ReservationType>
+  ) => {
+    await db.reservations.update(id, updates);
+    fetchReservations();
+  };
+
+  // Delete a reservation
+  const deleteReservation = async (id: number) => {
+    await db.reservations.delete(id);
+    fetchReservations();
+  };
+
+  useEffect(() => {
+    fetchReservations();
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -95,12 +133,14 @@ export default function TableReservation() {
                   <FontAwesomeIcon
                     icon={faPenToSquare}
                     className="text-xl text-brand-base"
-                    onClick={() => {}}
+                    onClick={() =>
+                      updateReservation(reservation.id, { status: "Confirmed" })
+                    }
                   />
                   <FontAwesomeIcon
                     icon={faTrashCan}
                     className="text-xl text-alert-danger"
-                    onClick={() => {}}
+                    onClick={() => deleteReservation(reservation.id)}
                   />
                 </div>
               </td>

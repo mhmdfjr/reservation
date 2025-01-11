@@ -101,7 +101,7 @@ export default function Dashboard() {
   return (
     <div className="w-full flex flex-col justify-start items-center gap-4 p-4 ">
       <div
-        className="xl:hidden w-full flex overflow-hidden relative border-2"
+        className="xl:hidden w-full flex overflow-hidden relative"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

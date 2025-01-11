@@ -8,7 +8,7 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ tableHead, children }) => {
   return (
     <table className="h-full w-full overflow-x-auto lg:overflow-x-hidden">
-      <thead className="bg-N2.2 sticky top-0 z-20 bg-brand-10 dark:bg-brand-90 bg-opacity-15">
+      <thead className="bg-N2.2 sticky top-0 z-10 bg-brand-10 dark:bg-brand-90 bg-opacity-15">
         <tr>
           {tableHead.map((label, index) => (
             <th

@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import Button from "@/components/button";
 import Input from "@/components/input";
 import DatePicker from "@/components/date-picker";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { db, ReservationType } from "@/app/db/db";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import TableReservation from "@/components/table/tableReservation";
@@ -28,6 +31,39 @@ const Reservation = () => {
 
   const router = useRouter();
 
+  const [reservations, setReservations] = useState<ReservationType[]>([]);
+  const [newReservation, setNewReservation] = useState<
+    Partial<ReservationType>
+  >({
+    customerName: "",
+    roomType: "",
+    roomNumber: undefined,
+    startDate: "",
+    endDate: "",
+    serviceType: "",
+    status: "Pending",
+  });
+
+  const fetchReservations = useCallback(async () => {
+    try {
+      const data = await db.reservations.toArray();
+      setReservations(data);
+    } catch (error) {
+      console.error("Failed to fetch reservations:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchReservations();
+  }, []);
+
+  const addReservation = async () => {
+    if (newReservation.customerName && newReservation.roomType) {
+      await db.reservations.add(newReservation as ReservationType);
+      fetchReservations();
+    }
+  };
+
   useEffect(() => {
     if (!token) {
       router.push("/");
@@ -35,11 +71,17 @@ const Reservation = () => {
   }, [token, router]);
 
   const handleStartDateChange = (date: string) => {
-    setStartDate(date);
+    setNewReservation((prev) => ({
+      ...prev,
+      startDate: date,
+    }));
   };
 
   const handleEndDateChange = (date: string) => {
-    setEndDate(date);
+    setNewReservation((prev) => ({
+      ...prev,
+      endDate: date,
+    }));
   };
 
   return (
@@ -51,23 +93,38 @@ const Reservation = () => {
               label="Reservation ID"
               name="id"
               type="text"
-              value={id ? id.toString() : ""}
-              onChange={(e) => setId(Number(e.target.value))}
+              value={newReservation.id?.toString() || "0"}
+              onChange={(e) =>
+                setNewReservation((prev) => ({
+                  ...prev,
+                  id: Number(e.target.value),
+                }))
+              }
             />
             <Input
               label="Name"
               name="name"
               type="text"
-              value={name ? name : ""}
-              onChange={(e) => setName(e.target.value)}
+              value={newReservation.customerName || ""}
+              onChange={(e) =>
+                setNewReservation((prev) => ({
+                  ...prev,
+                  customerName: e.target.value,
+                }))
+              }
             />
             <Input
               label="Room Type"
               type="select"
-              onChange={(e) => setRoomType(e.target.value)}
-              placeholder={roomType ? roomType : "Pilih"}
+              onChange={(e) =>
+                setNewReservation((prev) => ({
+                  ...prev,
+                  roomType: e.target.value,
+                }))
+              }
+              placeholder={newReservation.roomType || "Pilih"}
               name="type"
-              value={roomType ? roomType : ""}
+              value={newReservation.roomType || "Pilih"}
               options={["Standard", "Suite", "Deluxe"]}
             />
           </div>
@@ -77,8 +134,13 @@ const Reservation = () => {
               label="Room Number"
               name="number"
               type="number"
-              value={roomNumber ? roomNumber.toString() : ""}
-              onChange={(e) => setRoomNumber(Number(e.target.value))}
+              value={newReservation.roomNumber?.toString() || "0"}
+              onChange={(e) =>
+                setNewReservation((prev) => ({
+                  ...prev,
+                  roomNumber: Number(e.target.value),
+                }))
+              }
             />
             <DatePicker
               title="Start Date"
@@ -111,7 +173,7 @@ const Reservation = () => {
             label="Save"
             variant="primary"
             size="small"
-            onClick={() => {}}
+            onClick={() => addReservation()}
           />
         </div>
       </div>

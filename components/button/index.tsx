@@ -83,6 +83,8 @@ export default function Button({
           variant === "tertiary",
         "text-alert-danger hover:text-alert-danger":
           variant === "secondary-danger",
+        "text-basic-black dark:text-basic-white hover:text-alert-danger dark:hover:text-alert-danger":
+          variant === "tertiary-danger",
         "text-black active:text-brand-base": variant === "submenu",
         "text-brand-base ": variant === "submenu-active",
         "text-gray-medium-light":

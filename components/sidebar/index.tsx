@@ -70,7 +70,7 @@ export default function Sidebar(props: any) {
   return (
     <div
       className={clsx(
-        "w-60 bg-basic-white dark:bg-basic-black h-screen lg:h-full lg:fixed scrollbar-hide overflow-y-auto min-h-screen lg:flex flex-col justify-start gap-12 px-4 py-4 z-50",
+        "w-60 min-h-screen h-screen fixed lg:flex flex-col justify-start gap-12 bg-basic-white dark:bg-basic-black scrollbar-hide overflow-y-auto px-4 py-4 z-50",
         {
           hidden: props.display === "hidden",
           absolute: props.display === "show",
@@ -98,22 +98,6 @@ export default function Sidebar(props: any) {
               />
             </li>
           ))}
-        </ul>
-      </div>
-
-      <div className="logout">
-        <ul className="flex flex-col gap-4 text-body text-basic-black dark:text-basic-white">
-          <Button
-            variant="tertiary-danger"
-            leftIcon={
-              <FontAwesomeIcon
-                icon={faArrowRightFromBracket}
-                style={{ fontSize: "24px" }}
-              />
-            }
-            label="Keluar"
-            onClick={handleLogout}
-          />
         </ul>
       </div>
     </div>

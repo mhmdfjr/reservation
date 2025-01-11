@@ -60,7 +60,7 @@ export default function ThemeSwitcher() {
 
   return (
     <button
-      className="fixed right-6 bottom-10 w-14 aspect-square rounded-full bg-brand-base text-basic-white dark:text-basic-black flex justify-center items-center"
+      className="fixed right-6 bottom-10 w-14 aspect-square rounded-full bg-brand-base text-basic-white dark:text-basic-black flex justify-center items-center z-50"
       onClick={toggleTheme}
     >
       {theme === "light" && (

@@ -3,9 +3,10 @@
 import Table from ".";
 import clsx from "clsx";
 import { useState, useEffect } from "react";
+import { db, ReservationType } from "@/app/db/db";
 import Button from "../button";
 import Cookies from "js-cookie";
-import reservations from "@/app/data/reservasions.json";
+// import reservations from "@/app/data/reservasions.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleRight,
@@ -17,8 +18,29 @@ interface TableDashboardProps {
 }
 const TableDashboard: React.FC<TableDashboardProps> = ({ date }) => {
   const tableHeaders = ["ID", "Name", "Type", "Room", "Start", "End", "Status"];
-
   const token = Cookies.get("token");
+
+  const [reservations, setReservations] = useState<ReservationType[]>([]);
+  const [newReservation, setNewReservation] = useState<
+    Partial<ReservationType>
+  >({
+    customerName: "",
+    roomType: "",
+    roomNumber: undefined,
+    startDate: "",
+    endDate: "",
+    serviceType: "",
+    status: "Pending",
+  });
+
+  const fetchReservations = async () => {
+    const data = await db.reservations.toArray();
+    setReservations(data);
+  };
+
+  useEffect(() => {
+    fetchReservations();
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {

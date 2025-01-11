@@ -17,6 +17,10 @@ export default function Login() {
     if (username === "admin" && password === "admin123") {
       router.push("/dashboard");
       Cookies.set("token", "loggedin", { expires: 0.5 });
+      Cookies.set("username", "admin", { expires: 0.5 });
+      Cookies.set("email", "admin@gmail.com", { expires: 0.5 });
+      Cookies.set("role", "Receptionist", { expires: 0.5 });
+      Cookies.set("password", "admin123", { expires: 0.5 });
     }
   };
 
