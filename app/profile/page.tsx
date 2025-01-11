@@ -11,11 +11,22 @@ export default function Profile() {
   const emailCookies = Cookies.get("email");
   const passwordCookies = Cookies.get("password");
 
-  const [username, setUsername] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string | number>("");
+  const [username, setUsername] = useState<string>(
+    usernameCookies ? usernameCookies : ""
+  );
+  const [email, setEmail] = useState<string>(emailCookies ? emailCookies : "");
+  const [password, setPassword] = useState<string | number>(
+    passwordCookies ? passwordCookies : ""
+  );
 
   const router = useRouter();
+
+  const handleUpdateProfile = () => {
+    Cookies.set("username", username, { expires: 0.5 });
+    Cookies.set("email", email, { expires: 0.5 });
+    Cookies.set("role", "Receptionist", { expires: 0.5 });
+    Cookies.set("password", password.toString(), { expires: 0.5 });
+  };
 
   useEffect(() => {
     if (!token) {
@@ -31,21 +42,21 @@ export default function Profile() {
             label="Name"
             name="name"
             type="text"
-            value={usernameCookies ? usernameCookies : username}
+            value={username ? username : ""}
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
             label="Email"
             name="email"
             type="text"
-            value={emailCookies ? emailCookies : email}
+            value={email ? email : ""}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             type="password"
             label="Password"
             name="password"
-            value={passwordCookies ? passwordCookies : password.toString()}
+            value={password ? password.toString() : ""}
             placeholder="Insert password"
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -62,7 +73,7 @@ export default function Profile() {
             label="Save"
             variant="primary"
             size="small"
-            onClick={() => {}}
+            onClick={handleUpdateProfile}
           />
         </div>
       </div>

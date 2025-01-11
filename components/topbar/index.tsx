@@ -6,7 +6,7 @@ import { faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 import Profil from "@/public/profil.jpg";
 import Image from "next/image";
 import Button from "../button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
@@ -15,10 +15,16 @@ interface TopBarProps {
 }
 
 export default function TopBar({ onMenuClick }: TopBarProps) {
-  const roleCookies = Cookies.get("role");
-  const usernameCookies = Cookies.get("username");
+  const [roleCookies, setRoleCookies] = useState<string | null>(null);
+  const [usernameCookies, setUsernameCookies] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    // Fetch cookies after component mounts
+    setRoleCookies(Cookies.get("role") || null);
+    setUsernameCookies(Cookies.get("username") || null);
+  }, []);
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -58,17 +64,22 @@ export default function TopBar({ onMenuClick }: TopBarProps) {
         onClick={handleModal}
       >
         <div className="flex flex-col justify-center items-end">
-          <div className="hidden lg:inline-block text-sm font-bold text-basic-black dark:text-basic-white capitalize">
-            {roleCookies}
-          </div>
-          <div className="hidden lg:inline-block text-sm text-basic-black dark:text-basic-white capitalize">
-            {usernameCookies}
-          </div>
+          {roleCookies && (
+            <div className="hidden lg:inline-block text-sm font-bold text-basic-black dark:text-basic-white">
+              <p>{roleCookies}</p>
+            </div>
+          )}
+          {usernameCookies && (
+            <div className="hidden lg:inline-block text-sm text-basic-black dark:text-basic-white">
+              <p>{usernameCookies}</p>
+            </div>
+          )}
         </div>
         <div className="w-8 h-8 flex relative">
           <Image
             src={Profil}
             fill={true}
+            sizes="(max-width: 24px)"
             objectFit="cover"
             alt="profil"
             className="rounded-full"

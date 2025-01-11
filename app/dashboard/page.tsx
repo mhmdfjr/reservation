@@ -151,7 +151,7 @@ export default function Dashboard() {
       </div>
 
       <div className="w-full flex flex-col xl:flex-row xl:justify-start xl:items-start justify-center items-center gap-4">
-        <div className="py-6 px-8 xl:flex flex-col bg-basic-white dark:bg-basic-black rounded-2xl gap-6 border-2">
+        <div className="py-6 px-8 xl:flex flex-col bg-basic-white dark:bg-basic-black rounded-2xl gap-6 border-2 md:hidden">
           <p className="text-h8-bold text-basic-black dark:text-basic-white mb-4">
             Calender
           </p>

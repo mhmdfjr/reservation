@@ -34,7 +34,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const [showDatepicker, setShowDatepicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  const [selectedYear, setSelectedYear] = useState<number>();
   const [currentYear, setCurrentYear] = useState<number>(getYear(new Date()));
   const [showYearDropdown, setShowYearDropdown] = useState(false);
 
@@ -43,36 +42,36 @@ const DatePicker: React.FC<DatePickerProps> = ({
       const parsedDate = parse(value, "yyyy-MM-dd", new Date());
       setSelectedDate(parsedDate);
       setCurrentMonth(parsedDate);
-      setSelectedYear(getYear(parsedDate));
+      setCurrentYear(getYear(parsedDate));
     } else {
+      const formattedToday = format(today, "yyyy-MM-dd");
       setSelectedDate(today);
-      // Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
       setCurrentMonth(today);
       setCurrentYear(getYear(today));
-      onDateChange(format(today, "yyyy-MM-dd"));
+      onDateChange(formattedToday);
     }
-  }, [value, today, onDateChange]);
+  }, [value]);
 
   const toggleDatepicker = () => {
-    setShowDatepicker(!showDatepicker);
+    setShowDatepicker((prev) => !prev);
     setShowYearDropdown(false);
   };
 
   const handlePrevMonth = () => {
-    const newDate = subMonths(currentMonth, 1);
-    setCurrentMonth(newDate);
-    setSelectedYear(getYear(newDate));
+    const newMonth = subMonths(currentMonth, 1);
+    setCurrentMonth(newMonth);
+    setCurrentYear(getYear(newMonth));
   };
 
   const handleNextMonth = () => {
-    const newDate = addMonths(currentMonth, 1);
-    setCurrentMonth(newDate);
-    setSelectedYear(getYear(newDate));
+    const newMonth = addMonths(currentMonth, 1);
+    setCurrentMonth(newMonth);
+    setCurrentYear(getYear(newMonth));
   };
 
   const handleYearSelect = (year: number) => {
-    setSelectedYear(year);
     setCurrentMonth(setYear(currentMonth, year));
+    setCurrentYear(year);
     setShowYearDropdown(false);
   };
 
@@ -83,7 +82,13 @@ const DatePicker: React.FC<DatePickerProps> = ({
   };
 
   const renderYears = () => {
-    const years = Array.from({ length: 100 }, (_, i) => currentYear - 99 + i);
+    const startYear = currentYear - 50;
+    const endYear = currentYear + 50;
+    const years = Array.from(
+      { length: endYear - startYear + 1 },
+      (_, i) => startYear + i
+    );
+
     return (
       <div className="absolute top-12 right-0 bg-white border border-gray-300 rounded-lg shadow-lg z-50 p-2 max-h-48 overflow-auto scrollbar-hide">
         {years.map((year) => (
@@ -119,21 +124,27 @@ const DatePicker: React.FC<DatePickerProps> = ({
     });
     const endDate = endOfMonth(currentMonth);
     const dates: Date[] = [];
-    let date = startDate;
 
-    while (isSameMonth(date, currentMonth) || date <= endDate) {
+    for (
+      let date = startDate;
+      date <= addDays(endDate, 6);
+      date = addDays(date, 1)
+    ) {
       dates.push(date);
-      date = addDays(date, 1);
     }
 
     return dates.map((date) => (
       <div
-        key={date.toString()}
-        onClick={() => handleDateSelect(date)}
+        key={date.toISOString()}
+        onClick={() =>
+          isSameMonth(date, currentMonth) && handleDateSelect(date)
+        }
         className={`p-2 rounded-lg cursor-pointer ${
           isSameDay(date, selectedDate ?? new Date())
             ? "bg-brand-base text-basic-white dark:text-basic-black"
-            : "text-basic-black dark:text-basic-white hover:bg-brand-90"
+            : isSameMonth(date, currentMonth)
+            ? "text-basic-black dark:text-basic-white hover:bg-brand-90"
+            : "text-gray-400 dark:text-gray-500"
         }`}
       >
         {format(date, "d")}
@@ -199,7 +210,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 className="font-bold text-basic-black dark:text-basic-white cursor-pointer"
                 onClick={() => setShowYearDropdown(!showYearDropdown)}
               >
-                {selectedYear ? selectedYear : currentYear}
+                {currentYear}
               </span>
             </div>
             <button

@@ -37,6 +37,7 @@ export default function Login() {
           <Image
             src={LoginImage}
             fill={true}
+            sizes="(max-width: 768px)"
             objectFit="cover"
             alt="login"
             className="rounded-lg"
