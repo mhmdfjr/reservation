@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "customerName": "John Doe",
+    "roomType": "Deluxe",
+    "roomNumber": 101,
+    "startDate": "2025-01-15",
+    "endDate": "2025-01-20",
+    "serviceType": "Full Board",
+    "status": "Confirmed"
+  },
+  {
+    "id": 2,
+    "customerName": "Jane Smith",
+    "roomType": "Standard",
+    "roomNumber": 202,
+    "startDate": "2025-01-12",
+    "endDate": "2025-01-15",
+    "serviceType": "Breakfast Only",
+    "status": "Pending"
+  },
+  {
+    "id": 3,
+    "customerName": "Alice Johnson",
+    "roomType": "Suite",
+    "roomNumber": 301,
+    "startDate": "2025-01-18",
+    "endDate": "2025-01-22",
+    "serviceType": "Half Board",
+    "status": "Confirmed"
+  },
+  {
+    "id": 4,
+    "customerName": "Bob Brown",
+    "roomType": "Standard",
+    "roomNumber": 204,
+    "startDate": "2025-01-10",
+    "endDate": "2025-01-13",
+    "serviceType": "Full Board",
+    "status": "Cancelled"
+  },
+  {
+    "id": 5,
+    "customerName": "Emily Davis",
+    "roomType": "Deluxe",
+    "roomNumber": 102,
+    "startDate": "2025-01-25",
+    "endDate": "2025-01-30",
+    "serviceType": "Breakfast Only",
+    "status": "Pending"
+  },
+  {
+    "id": 6,
+    "customerName": "Michael Wilson",
+    "roomType": "Suite",
+    "roomNumber": 305,
+    "startDate": "2025-01-05",
+    "endDate": "2025-01-10",
+    "serviceType": "Full Board",
+    "status": "Confirmed"
+  },
+  {
+    "id": 7,
+    "customerName": "Sophia Taylor",
+    "roomType": "Standard",
+    "roomNumber": 207,
+    "startDate": "2025-01-14",
+    "endDate": "2025-01-17",
+    "serviceType": "Half Board",
+    "status": "Pending"
+  },
+  {
+    "id": 8,
+    "customerName": "William Martinez",
+    "roomType": "Deluxe",
+    "roomNumber": 103,
+    "startDate": "2025-01-20",
+    "endDate": "2025-01-25",
+    "serviceType": "Breakfast Only",
+    "status": "Confirmed"
+  },
+  {
+    "id": 9,
+    "customerName": "Olivia Anderson",
+    "roomType": "Suite",
+    "roomNumber": 302,
+    "startDate": "2025-01-08",
+    "endDate": "2025-01-13",
+    "serviceType": "Full Board",
+    "status": "Cancelled"
+  },
+  {
+    "id": 10,
+    "customerName": "James Thomas",
+    "roomType": "Standard",
+    "roomNumber": 205,
+    "startDate": "2025-01-16",
+    "endDate": "2025-01-19",
+    "serviceType": "Breakfast Only",
+    "status": "Confirmed"
+  },
+  {
+    "id": 11,
+    "customerName": "Isabella Jackson",
+    "roomType": "Deluxe",
+    "roomNumber": 104,
+    "startDate": "2025-01-18",
+    "endDate": "2025-01-23",
+    "serviceType": "Half Board",
+    "status": "Pending"
+  },
+  {
+    "id": 12,
+    "customerName": "Ethan White",
+    "roomType": "Suite",
+    "roomNumber": 306,
+    "startDate": "2025-01-07",
+    "endDate": "2025-01-12",
+    "serviceType": "Full Board",
+    "status": "Confirmed"
+  },
+  {
+    "id": 13,
+    "customerName": "Mia Harris",
+    "roomType": "Standard",
+    "roomNumber": 208,
+    "startDate": "2025-01-13",
+    "endDate": "2025-01-15",
+    "serviceType": "Breakfast Only",
+    "status": "Pending"
+  },
+  {
+    "id": 14,
+    "customerName": "Alexander Clark",
+    "roomType": "Deluxe",
+    "roomNumber": 105,
+    "startDate": "2025-01-19",
+    "endDate": "2025-01-24",
+    "serviceType": "Full Board",
+    "status": "Confirmed"
+  },
+  {
+    "id": 15,
+    "customerName": "Charlotte Lewis",
+    "roomType": "Suite",
+    "roomNumber": 303,
+    "startDate": "2025-01-11",
+    "endDate": "2025-01-16",
+    "serviceType": "Half Board",
+    "status": "Cancelled"
+  },
+  {
+    "id": 16,
+    "customerName": "Benjamin Walker",
+    "roomType": "Standard",
+    "roomNumber": 206,
+    "startDate": "2025-01-21",
+    "endDate": "2025-01-26",
+    "serviceType": "Breakfast Only",
+    "status": "Confirmed"
+  },
+  {
+    "id": 17,
+    "customerName": "Amelia Young",
+    "roomType": "Deluxe",
+    "roomNumber": 106,
+    "startDate": "2025-01-22",
+    "endDate": "2025-01-27",
+    "serviceType": "Full Board",
+    "status": "Pending"
+  },
+  {
+    "id": 18,
+    "customerName": "Henry King",
+    "roomType": "Suite",
+    "roomNumber": 307,
+    "startDate": "2025-01-06",
+    "endDate": "2025-01-11",
+    "serviceType": "Half Board",
+    "status": "Confirmed"
+  },
+  {
+    "id": 19,
+    "customerName": "Ava Wright",
+    "roomType": "Standard",
+    "roomNumber": 209,
+    "startDate": "2025-01-09",
+    "endDate": "2025-01-14",
+    "serviceType": "Breakfast Only",
+    "status": "Cancelled"
+  },
+  {
+    "id": 20,
+    "customerName": "Lucas Scott",
+    "roomType": "Deluxe",
+    "roomNumber": 107,
+    "startDate": "2025-01-23",
+    "endDate": "2025-01-28",
+    "serviceType": "Full Board",
+    "status": "Confirmed"
+  }
+]
